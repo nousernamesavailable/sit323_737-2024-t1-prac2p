@@ -1,0 +1,10 @@
+#dependencies: 
+node_modules
+package-lock.json
+05-project
+
+
+#file types 
+*.log
+*.code-workspace
+
