@@ -29,6 +29,7 @@ app.get('/messages', (req, res) =>{
     })
 })
 
+// post a message from webpage 
 app.post('/messages', (req, res) =>{
     var message = new Message(req.body)
 
@@ -37,7 +38,7 @@ app.post('/messages', (req, res) =>{
         console.log('saved')
     })
     .then(() => {
-        //second 
+        // emit will allow the page to wait for a message rather than polling 
         io.emit('message', req.body)
         res.sendStatus(200)
     })
@@ -60,4 +61,5 @@ mongoose.connect(dbUrl)
 //switched from ${app}.listen to ${http}.listen 
 var server = http.listen(3000, () => {
     console.log('server is listening on prot', server.address)
+
 })
