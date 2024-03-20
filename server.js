@@ -1,29 +1,65 @@
-const express = require("express");
-const app = express()
-const addTwoNumber = (n1,n2) => {
-    return n1 + n2 
-}
-app.get("/addTwoNumber", (req,res) => {
-    const n1= parseInt(req.query.n1)
-    const n2 = parseInt(req.query.n2)
-    const result = addTwoNumber(n1,n2)
-    res.json({statuscode:200, data: result})
-});
+//node js dependencies 
+var express = require('express')
+var bodyParser = require('body-parser')
+var app = express()
+var http = require('http').Server(app)
+var io = require('socket.io')(http)
+var mongoose = require('mongoose')
 
-//opening localhost:4099/ will bring up the very exciting below webpage. 
-app.get("/", (req, res) => {
-    const n1 = "<html><body><H1>HELLO WORLD from me </H1></body></html>"
-    res.set('Content-Type', 'text/html')
-    res.send(Buffer.from(n1))
+
+app.use(express.static(__dirname))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: false}))
+
+var dbUrl = 'mongodb+srv://user:user@learning-node.anekdjh.mongodb.net/'
+
+var Message = mongoose.model('Message', {
+    name: String,
+    message: String
 })
 
-//as per tutorial - adding two numbers together for the console
-var number1 = 24
-var number2 = 49
-console.log("adding the following numbers together: " + number1 + " and " + number2)
-console.log(addTwoNumber(number1,number2))
-const port = 4099
+app.get('/messages', (req, res) =>{
+    Message.find()
+    .then((messages) => {
+        console.log("working")
+        res.send(messages)
+    })
+    .catch((err) => {
+        console.log("couldn't retrieve messages: " + err)
+    })
+})
 
-app.listen(port, () => {
-    console.log("also, we're gonna be listening to port number:" + port);
+// post a message from webpage 
+app.post('/messages', (req, res) =>{
+    var message = new Message(req.body)
+
+    message.save()
+    .then(() => {
+        console.log('saved')
+    })
+    .then(() => {
+        // emit will allow the page to wait for a message rather than polling 
+        io.emit('message', req.body)
+        res.sendStatus(200)
+    })
+    .catch((err) => {
+        res.sendStatus(500)
+    })
+})
+
+io.on('connection', (socket) => {
+    //console.log here for debugging!
+    //console.log('a user connected!')
+})
+
+// mongoose no longer accepts callbacks - this is a promise below. 
+mongoose.connect(dbUrl)
+.then((success)=> console.log("successfuly connected to mongo"))
+.catch((err)=> console.log("issue with connection: " + err));
+
+
+//switched from ${app}.listen to ${http}.listen 
+var server = http.listen(3000, () => {
+    console.log('server is listening on prot', server.address)
+
 })

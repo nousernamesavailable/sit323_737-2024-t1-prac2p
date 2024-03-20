@@ -1,21 +1,19 @@
 {
-  "name": "sit323_737-2024-t1-prac2p",
+  "name": "05-project",
   "version": "1.0.0",
-  "description": "2.1P submission for sit323",
+  "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
   "keywords": [],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nousernamesavailable/sit323_737-2024-t1-prac2p.git"
-  },
-  "author": "216019554",
+  "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.20.2",
     "express": "^4.18.3",
-    "sit323_737-2024-t1-prac2p": "github:nousernamesavailable/sit323_737-2024-t1-prac2p"
+    "mongoose": "^8.2.2",
+    "socket.io": "^4.7.4"
   }
 }
