@@ -8,6 +8,14 @@
     "start": "node server.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nousernamesavailable/sit323_737-2024-t1-prac2p.git"
+  },
+  "author": "216019554",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.3",
+    "sit323_737-2024-t1-prac2p": "github:nousernamesavailable/sit323_737-2024-t1-prac2p"
+  }
 }
