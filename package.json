@@ -1,0 +1,13 @@
+{
+  "name": "sit323_737-2024-t1-prac2p",
+  "version": "1.0.0",
+  "description": "2.1P submission for sit323",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
