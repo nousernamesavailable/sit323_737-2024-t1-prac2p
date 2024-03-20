@@ -7,7 +7,7 @@ app.get("/addTwoNumber", (req,res)=>{
     const n1= parseInt(req.query.n1);
     const n2=parseInt(req.query.n2);
     const result = addTwoNumber(n1,n2);
-    res.json({statuscocde:200, data: result }); 
+    res.json({statuscode:200, data: result}); 
 });
 
 app.get("/", (req, res) => {
@@ -15,8 +15,13 @@ app.get("/", (req, res) => {
     res.set('Content-Type', 'text/html');
     res.send(Buffer.from(n1));     
 })
-console.log (addTwoNumber(19,12));
+
+//as per tutorial - adding two numbers together for the console
+var number1 = 24
+var number2 = 49
+console.log("adding the following numbers together: " + number1 + " and " + number2)
+console.log (addTwoNumber(number1,number2));
 const port=3040;
 app.listen(port,()=> {
-    console.log("hello i'm listening to port "+port);
+    console.log("also, we're gonna be listening to port "+port);
 })
